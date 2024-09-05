@@ -2,45 +2,44 @@ import gameOfThrone.*
 
 test "encontrar artefactos" {
 	
-	daenerys.encontrar(espada)
-	daenerys.encontrar(libro)
-	daenerys.encontrar(collar)
+	daenerys.encontrarart(espadaDragon)
+	daenerys.encontrarart(librodeMagiAncestral)
+	daenerys.encontrarart(collardeFuego)
 
-	assert.equals( #{espada, libro}, daenerys.artefactos() )
+	assert.equals( [espadaDragon,librodeMagiAncestral], daenerys.artefactos() )
 	
 }
 
 test "castillo" {
 
-	daenerys.encontrar(espada)
-	daenerys.encontrar(libro)
-	daenerys.volverACasa()
- 	daenerys.encontrar(collar)
- 	daenerys.volverACasa()
+	daenerys.encontrarart(espadaDragon)
+	daenerys.encontrarart(librodeMagiAncestral)
+	rocadragon.volveracasa()
+ 	daenerys.encontrarart(collardeFuego)
+ 	rocadragon.volveracasa()
  	
  	assert.that(daenerys.artefactos().isEmpty())
- 	assert.equals(#{espada,libro,collar}, castillo.artefactos())
+ 	assert.equals([espadaDragon,librodeMagiAncestral,collardeFuego], rocadragon.artefactostotales())
  	
 }
 
 test "posesiones" {
 	
-	castillo.agregarArtefactos(#{collar, espada})
-	
-	daenerys.encontrar(armadura)
-	assert.equals(#{collar, armadura, espada}, daenerys.posesiones())
-	assert.that(daenerys.posee(armadura))
-	assert.notThat(daenerys.posee(libro))
+	daenerys.encontrarart(espadaDragon)
+	daenerys.encontrarart(armaduradeAceroValyrio)
+	assert.equals([espadaDragon,armaduradeAceroValyrio], daenerys.artefactoencontrado())
+	assert.that(daenerys.especial(armaduradeAceroValyrio))
+	assert.notThat(daenerys.especial(librodeMagiAncestral))
 	
 }
 
 test "historia" {
-	daenerys.encontrar(espada)
-	daenerys.encontrar(libro)
-	daenerys.encontrar(collar)
-	daenerys.volverACasa()
-	daenerys.encontrar(armadura)
-	daenerys.encontrar(collar)
+	daenerys.encontrarart(espadaDragon)
+	daenerys.encontrarart(librodeMagiAncestral)
+	daenerys.encontrarart(collardeFuego)
+	rocadragon.volveracasa()
+	daenerys.encontrarart(armaduradeAceroValyrio)
+	daenerys.encontrarart(collardeFuego)
 
-  assert.equals([espada, libro, collar, armadura, collar], daenerys.historia())	
+  assert.equals([espadaDragon, librodeMagiAncestral, collardeFuego, armaduradeAceroValyrio, collardeFuego], daenerys.ordenartefactos())	
 }
